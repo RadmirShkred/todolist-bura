@@ -3,13 +3,26 @@ import './item-add-form.css';
 
 class ItemAddForm extends Component {
 
-    onLabelChange = () => {
-        console.log('.');
+    state = {
+        label: '',
+    }
+
+    onLabelChange = (e) => {
+        this.setState({
+            label: e.target.value,
+        })
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.props.onItemAdded(this.state.label);
     }
 
     render() {
         return (
-            <form className="item-add-form d-flex">
+            <form className="item-add-form d-flex"
+                  onSubmit={this.onSubmit}
+            >
                 <input
                     type="text"
                     className="form-control input-form-control"
@@ -18,7 +31,6 @@ class ItemAddForm extends Component {
                 />
                 <button
                     className="btn btn-outline-secondary button-add-item"
-                    onClick={() => this.props.onItemAdded('hello')}
                 >Add Item
                 </button>
             </form>
